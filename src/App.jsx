@@ -25,7 +25,7 @@ const App = () => {
     .then(response => {
       console.log(response.data)
       setTimeout(() => {
-        setImgUrl(`url(${response.data.hdurl})`)
+        setImgUrl(`url(${response.data.url})`)
       }, 5000)
       // console.log(response.data.hdurl)
     })

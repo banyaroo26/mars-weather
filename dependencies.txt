@@ -1,4 +1,4 @@
 sass-embedded
 react-router-dom
 axios
-@lottiefiles/dotlottie-react
+// @lottiefiles/dotlottie-react
