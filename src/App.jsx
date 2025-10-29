@@ -4,7 +4,6 @@ import Loading from "./Loading";
 
 const App = () => {
   let [image, setImage] = useState(null)
-  let [hdImage, setHDImage] = useState(null)
 
   useEffect(() => {
     callImageApi()
@@ -36,7 +35,7 @@ const App = () => {
 
         new_image.src = response.data.hdurl
         new_image.onload = () => {
-          setHDImage(new_image)
+          setImage(new_image)
           console.log("HD image loaded")
         }
 
@@ -57,13 +56,11 @@ const App = () => {
 
   return (
     <div className="main">
-        {
-          image
-            ? <div className="main" style={{ backgroundImage: `url(${image.src})` }}></div>
-            : hdImage
-              ? <div className="main" style={{ backgroundImage: `url(${hdImage.src})` }}></div>
-              : <Loading />
-        }
+      {
+        image != null
+          ? <div className="main" style={{ "backgroundImage": "url(" + image.src + ")" }}> </div>
+          : <Loading />
+      }
     </div>
   )
 
