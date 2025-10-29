@@ -10,16 +10,25 @@
     background-position: center;
 }
 
+@mixin flex-column() {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
 .main {
     @include full-screen();
     @include main-bg-image();
     position: relative;
 
     .center-image {
+        @include flex-column();
         position: absolute;
         left: 50%;
         top: 50%;
         transform: translate(-50%, -50%);
+        color: #f8f8f8;
     }
 
 }

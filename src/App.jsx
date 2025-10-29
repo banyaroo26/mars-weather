@@ -4,6 +4,7 @@ import Loading from "./Loading";
 
 const App = () => {
   let [image, setImage] = useState(null)
+  let [hdImage, setHDImage] = useState(null)
 
   useEffect(() => {
     callImageApi()
@@ -24,19 +25,28 @@ const App = () => {
     axios.get(`${imgApi}?api_key=${apiKey}`)
     .then(response => {
       console.log(response.data)
-       // setImgUrl(`url(${response.data.hdurl})`)
+      // setImgUrl(`url(${response.data.hdurl})`)
       
-      let new_url = response.data.hdurl
       let new_image = new Image()
-      new_image.src = new_url
+      new_image.src = response.data.url
 
       new_image.onload = () => {
         setImage(new_image)
-        console.log("New image loaded")
+        console.log("New lmage loaded")
+
+        new_image.src = response.data.hdurl
+        new_image.onload = () => {
+          setHDImage(new_image)
+          console.log("HD image loaded")
+        }
+
+        new_image.onerror = () => {
+          console.log("Cannot log hd image")
+        }
       }
 
       new_image.onerror = () => {
-        console.log("Cannot load new image")
+        console.log("Cannot log new image")
       }
       // console.log(response.data.hdurl)
     })
@@ -47,11 +57,13 @@ const App = () => {
 
   return (
     <div className="main">
-      {
-        image != null
-        ? <div className="main" style={{ "backgroundImage": "url(" + image.src + ")" }}> </div>
-        : <Loading />
-      }
+        {
+          image
+            ? <div className="main" style={{ backgroundImage: `url(${image.src})` }}></div>
+            : hdImage
+              ? <div className="main" style={{ backgroundImage: `url(${hdImage.src})` }}></div>
+              : <Loading />
+        }
     </div>
   )
 
