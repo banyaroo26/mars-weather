@@ -3,7 +3,7 @@ import axios from "axios";
 import Loading from "./Loading";
 
 const App = () => {
-  let [imgUrl, setImgUrl] = useState(null)
+  let [image, setImage] = useState(null)
 
   useEffect(() => {
     callImageApi()
@@ -24,9 +24,20 @@ const App = () => {
     axios.get(`${imgApi}?api_key=${apiKey}`)
     .then(response => {
       console.log(response.data)
-      setTimeout(() => {
-        setImgUrl(`url(${response.data.hdurl})`)
-      }, 2000)
+       // setImgUrl(`url(${response.data.hdurl})`)
+      
+      let new_url = response.data.hdurl
+      let new_image = new Image()
+      new_image.src = new_url
+
+      new_image.onload = () => {
+        setImage(new_image)
+        console.log("New image loaded")
+      }
+
+      new_image.onerror = () => {
+        console.log("Cannot load new image")
+      }
       // console.log(response.data.hdurl)
     })
     .catch(error => {
@@ -37,8 +48,8 @@ const App = () => {
   return (
     <div className="main">
       {
-        imgUrl != null
-        ? <div className="main" style={{ "backgroundImage": imgUrl }}> </div>
+        image != null
+        ? <div className="main" style={{ "backgroundImage": "url(" + image.src + ")" }}> </div>
         : <Loading />
       }
     </div>
