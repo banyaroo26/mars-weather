@@ -33,6 +33,7 @@ const App = () => {
         setImage(new_image)
         console.log("New lmage loaded")
 
+        /*
         new_image.src = response.data.hdurl
         new_image.onload = () => {
           setImage(new_image)
@@ -42,6 +43,7 @@ const App = () => {
         new_image.onerror = () => {
           console.log("Cannot log hd image")
         }
+        */
       }
 
       new_image.onerror = () => {
