@@ -1,0 +1,4 @@
+sass-embedded
+react-router-dom
+axios
+@lottiefiles/dotlottie-react

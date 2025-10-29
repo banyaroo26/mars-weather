@@ -1,0 +1,31 @@
+
+@mixin full-screen() {
+    height: 100vh;
+}
+
+@mixin main-bg-image() {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+}
+
+.main {
+    @include full-screen();
+    @include main-bg-image();
+    position: relative;
+
+    .center-image {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+}
+
+body {
+    @include full-screen();
+    margin: 0px;
+    padding: 0px;
+}
